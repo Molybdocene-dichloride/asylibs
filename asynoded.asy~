@@ -1,0 +1,34 @@
+struct NodedPicture {
+       picture parent;
+       pair[] nodes;
+       void operator init() {
+
+       }
+       void addNode(pair node) {
+       	    this.nodes.push(node);
+       }
+       void addNodes(pair[] node) {
+            this.nodes.append(node);
+       }
+       void drawWithAddNode(path pth, int i, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+       	    addNode(point(pth, i));
+	    
+	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+       }
+       void drawWithAddNodes(path pth, int[] ii, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+            for(int i = 0; i < ii.length; ++i) {
+	    	    addNode(point(pth, ii[i]));
+            }
+	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+       }
+       void drawWithAddNodes(path pth, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+            for(int i = 0; i < size(pth); ++i) {
+	    	    addNode(point(pth, i));
+            }
+	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+       }       
+}
+
+picture operator cast(NodedPicture npic) {
+	return npic.parent;
+}

@@ -1,0 +1,11 @@
+import asyplants;
+
+NodedPicture ferret;
+ferret.addNode((4, 4));
+//draw(ferret, lowerpart);
+ferret.drawWithAddNode((1, 0)--(34, 25), 2, green);
+ferret.drawWithAddNode(lowerpart, 2, green);
+//ferret.drawWithAddNodes((1, 0)--(1, 12), new int[]{2});
+//ferret.drawWithAddNodes((1, 0)--(3, 19), blue);
+
+add(ferret);

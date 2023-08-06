@@ -1,0 +1,52 @@
+import asynoded;
+
+path lowerpart = (0, 14)--(0, 0)--(15, 0)--(30, 0)--(30, 14);
+NodedPicture Tank;
+//Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)--(1,0.915) to [out=90, in=90] (-1,0.915)--cycle)
+//Tank.drawNodes();
+
+NodedPicture ConeRoofTank;
+//ConeRoofTank.drawWithAddNodes((+0, 25)--lowerpart--(30, +11)--(15, +4)--cycle);
+//ConeRoofTank.drawNodes();
+
+NodedPicture DomeRoofTank;
+//DomeRoofTank.drawWithAddNodes((+0, 21)--lowerpart--(30, +7) .. --cycle); //Do!!
+//DomeRoofTank.drawNodes();
+
+NodedPicture FloatingRoofTank;
+//FloatingRoofTank.drawWithAddNodes((+0, 26)--lowerpart--(30, +12) --cycle);
+//FloatingRoofTank.drawNodes();
+
+NodedPicture Silos;
+//Silos.drawWithAddNodes((-0.7,-0.8) --
+		(0,-1.8) --
+		(0.7,-0.8) --
+		(0.7,1.590) to [out=90, in=90]
+		(-0.7,1.590) -- cycle
+);
+		
+		(-0.7,-0.8) -- (-0.7,-2)
+		(-0.8,-2) -- (-0.6,-2)
+		(0.7,-0.8) -- (0.7,-2)
+		(0.6,-2) -- (0.8,-2);
+//Silos.drawNodes();
+
+NodedPicture Drum;
+//Drum.drawWithAddNodes(
+//Drum.drawNodes();
+
+NodedPicture CentrifugalPump;
+//CentrifugalPump.drawWithAddNodes(
+//CentrifugalPump.drawNodes();
+
+NodedPicture HeatExchanger;
+//HeatExchanger.drawWithAddNodes(
+//HeatExchanger.drawNodes();
+
+NodedPicture BiPhaseHeatExchanger;
+//BiPhaseHeatExchanger.drawWithAddNodes(
+//BiPhaseHeatExchanger.drawNodes();
+
+NodedPicture TubeShellHeatExchanger;
+//TubeShellHeatExchanger.drawWithAddNodes(
+//TubeShellHeatExchanger.drawNodes();
