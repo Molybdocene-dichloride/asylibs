@@ -3,22 +3,18 @@ import asynoded;
 
 path lowerpart = (0, 14)--(0, 0)--(15, 0)--(30, 0)--t(30, 14);
 NodedPicture Tank;
-//Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)--(1,0.915) to [out=90, in=90] (-1,0.915)--cycle)
+//Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)-- to((1,0.915) to out=90, in=90) (-1,0.915)--cycle)
 //Tank.drawNodes();
 
 NodedPicture ConeRoofTank;
 ConeRoofTank.drawWithAddNodes((0, 25)--lowerpart--rlp(0, +11)--rlp(-15, +4)--cycle);
 //ConeRoofTank.drawNodes();
 
-path to(point c, int in, int out) { //To Do!!
-  
-}
-
 NodedPicture DomeRoofTank;
 /*DomeRoofTank.drawWithAddNodes((-1.5,-1.5) --
 		(1.5,-1.5) --
-		(1.5,0.7) to [out=90, in=0]
-		(0,1.5) to [out=180, in=90]
+		to((1.5,0.7), out=90, in=0) //-- controls (1.5, 1) and (0.3, 1.5)
+		to((0,1.5), out=180, in=90) //-- controls (-0.3, 1.5) and (-1.5, 1)
 		(-1.5,0.7) -- cycle);*/ //Do!!
 //DomeRoofTank.drawNodes();
 
@@ -30,7 +26,7 @@ NodedPicture Silos;
 /*Silos.drawWithAddNodes((-0.7,-0.8) --
 		(0,-1.8) --
 		(0.7,-0.8) --
-		(0.7,1.590) to [out=90, in=90]
+		to((0.7,1.590), out=90, in=90)
 		(-0.7,1.590) -- cycle
 );*/
 Silos.drawWithAddNodes((-0.7,-0.8) -- (-0.7,-2));
@@ -42,7 +38,7 @@ Silos.drawWithAddNodes((0.6,-2) -- (0.8,-2));
 NodedPicture Drum;
 /*Drum.drawWithAddNodes((0.324,-0.3) to [out=0, in=0]
 		(0.324,0.3) --
-		(-0.324,0.3) to [out=180, in=180]
+		to((-0.324,0.3), out=180, in=180)
 		(-0.324,-0.3) -- cycle
 );*/
 //Drum.drawNodes();

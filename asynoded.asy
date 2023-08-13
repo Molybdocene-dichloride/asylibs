@@ -4,6 +4,15 @@ point currentpoint = (0, 0);
 
 coordsys R=currentcoordsys;
 
+//path to(point s, point e, int out, int in) { //To Do!! right, left
+  //len1 * (cos(out), sin(out))
+  //len2 * (-cos(in), sin(in))
+  //s + len1 * (cos(out), sin(out)) = e + len2 * (-cos(in), sin(in))
+  //len2 * (-cos(in), sin(in)) - len1 * (cos(out), sin(out)) + e - s = 0
+  //
+  //return (1,1);
+//}
+
 point t(point p) {
   currentpoint = p;
   return p;
