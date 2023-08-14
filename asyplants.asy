@@ -6,29 +6,36 @@ NodedPicture Tank;
 //Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)-- to((1,0.915) to out=90, in=90) (-1,0.915)--cycle)
 //Tank.drawNodes();
 
-NodedPicture ConeRoofTank;
+NodedPicture ConeRoofTank; //checked?
 ConeRoofTank.drawWithAddNodes((0, 25)--lowerpart--rlp(0, +11)--rlp(-15, +4)--cycle);
 //ConeRoofTank.drawNodes();
 
-NodedPicture DomeRoofTank;
-/*DomeRoofTank.drawWithAddNodes((-1.5,-1.5) --
-		(1.5,-1.5) --
-		to((1.5,0.7), out=90, in=0) //-- controls (1.5, 1) and (0.3, 1.5)
-		to((0,1.5), out=180, in=90) //-- controls (-0.3, 1.5) and (-1.5, 1)
-		(-1.5,0.7) -- cycle);*/ //Do!!
+NodedPicture DomeRoofTank; //checked
+DomeRoofTank.drawWithAddNodes((-1.5,-1.5) -- (1.5,-1.5) --
+                              (1.5,0.7) .. controls (1.5, 1.3) and (0.6, 1.5) .. //to((1.5,0.7), out=90, in=0)
+                              (0, 1.5) .. controls (-0.6, 1.5) and (-1.5, 1.3) .. //to((0,1.5), out=180, in=90)
+                              (-1.5,0.7) -- cycle);
 //DomeRoofTank.drawNodes();
 
-NodedPicture FloatingRoofTank;
-FloatingRoofTank.drawWithAddNodes((0, 26)--lowerpart--rlp(0, +12) --cycle);
+NodedPicture FloatingRoofTank; //checked
+FloatingRoofTank.drawWithAddNodes((-1.5,1.5) --
+		(-1.5,-1.5) --
+		(1.5,-1.5) --
+		(1.5,1.5)
+);
+FloatingRoofTank.drawWithAddNodes(circ((-1.45,1.4), (0.05)));
+FloatingRoofTank.drawWithAddNodes(circ((1.45,1.4), (0.05)));
+FloatingRoofTank.drawWithAddNodes(rect((-1.4,1.3), (1.4,1.5)));
 //FloatingRoofTank.drawNodes();
 
-NodedPicture Silos;
-/*Silos.drawWithAddNodes((-0.7,-0.8) --
+NodedPicture Silos; //checked
+Silos.drawWithAddNodes((-0.7,-0.8) --
 		(0,-1.8) --
 		(0.7,-0.8) --
-		to((0.7,1.590), out=90, in=90)
-		(-0.7,1.590) -- cycle
-);*/
+		(0.7,1.590) .. controls (0.7, 1.89) and (0.30, 2.0) .. //to((0.7,1.590), out=90, in=90)
+		(0, 2.0) .. controls (-0.30, 2.0) and (-0.7, 1.89) ..
+                (-0.7,1.590) -- cycle
+);
 Silos.drawWithAddNodes((-0.7,-0.8) -- (-0.7,-2));
 Silos.drawWithAddNodes((-0.8,-2) -- (-0.6,-2));
 Silos.drawWithAddNodes((0.7,-0.8) -- (0.7,-2));
@@ -44,14 +51,17 @@ NodedPicture Drum;
 //Drum.drawNodes();
 
 NodedPicture CentrifugalPump;
+
 CentrifugalPump.drawWithAddNodes(circ((0,0), 0.4));
 CentrifugalPump.drawWithAddNodes(circ((0,0), 0.05));
   //(0,0) circle (0.4) circle (0.05);
 CentrifugalPump.drawWithAddNodes(
 		rpp(230.19, 0.4) --
 		rpp(230.19, 0.377) --
-		rlp(1,0) -- rpp(129.81, 0.377)
+		rlp(1,0) //-- rpp(129.81, 0.377)
 );
+CentrifugalPump.drawWithAddNodes(circle((0,0), 0.377));
+
 //CentrifugalPump.drawNodes();
 
 NodedPicture HeatExchanger;

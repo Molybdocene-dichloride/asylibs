@@ -13,6 +13,18 @@ coordsys R=currentcoordsys;
   //return (1,1);
 //}
 
+void print(string s) {
+  write(s);
+}
+
+void print(real s) {
+  write(string(s));
+}
+
+void resetp() {
+  currentpoint = (0, 0);
+}
+
 point t(point p) {
   currentpoint = p;
   return p;
@@ -47,8 +59,25 @@ point rpp(real a, real r) { //as PGF "++(:)"
 }
 
 path circ(point c, real r) {
-  currentpoint = c;
   return circle(c, r);
+}
+
+path circr(point c, real r) {
+  currentpoint = c;
+  return circ(c, r);
+}
+
+path rectangle(point a, point b) {
+  return a -- (a.x, b.y) -- b -- (b.x, a.y) -- cycle;
+}
+
+path rect(point a, point b) {
+  return rectangle(a, b);
+}
+
+path rectr(point a, point b) {
+  currentpoint = ((b.x - a.x) / 2 + a.x, (b.y - a.y) / 2 + a.y);
+  return rect(a, b);
 }
 
 path warc(point c, real s, real e, real r) {
@@ -72,19 +101,22 @@ struct NodedPicture {
        	    addNode(point(pth, i));
 	    
 	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+	    resetp();
        }
        void drawWithAddNodes(path pth, int[] ii, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
             for(int i = 0; i < ii.length; ++i) {
 	    	    addNode(point(pth, ii[i]));
             }
 	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+	    resetp();
        }
        void drawWithAddNodes(path pth, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
             for(int i = 0; i < size(pth); ++i) {
 	    	    addNode(point(pth, i));
             }
 	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
-       }       
+	    resetp();
+       }
 }
 
 picture operator cast(NodedPicture npic) {

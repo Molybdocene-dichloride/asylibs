@@ -1,4 +1,4 @@
 //For package checking
 import asyplants;
 
-add(HeatExchanger);
+add(CentrifugalPump.parent.scale(20));
