@@ -1,20 +1,22 @@
 import geometry;
 import asynoded;
 
-path lowerpart = (0, 14)--(0, 0)--(15, 0)--(30, 0)--t(30, 14);
+path lowerpart = (-1.5, 0.62)--(-1.5, -1.5)--(0, -1.5)--(1.5, -1.5)--t(1.5, 0.62);
+
+//Tanks
 NodedPicture Tank;
 //Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)-- to((1,0.915) to out=90, in=90) (-1,0.915)--cycle)
 //Tank.drawNodes();
 
 NodedPicture ConeRoofTank; //checked?
-ConeRoofTank.drawWithAddNodes((0, 25)--lowerpart--rlp(0, +11)--rlp(-15, +4)--cycle);
+ConeRoofTank.drawWithAddNodes((-1.5, 1.1)--lowerpart--(1.5, 1.1)--(0, 1.5)--cycle);
 //ConeRoofTank.drawNodes();
 
 NodedPicture DomeRoofTank; //checked
-DomeRoofTank.drawWithAddNodes((-1.5,-1.5) -- (1.5,-1.5) --
-                              (1.5,0.7) .. controls (1.5, 1.3) and (0.6, 1.5) .. //to((1.5,0.7), out=90, in=0)
+DomeRoofTank.drawWithAddNodes((-1.5, -1.5) -- (1.5, -1.5) --
+                              (1.5, 0.7) .. controls (1.5, 1.3) and (0.6, 1.5) .. //to((1.5,0.7), out=90, in=0)
                               (0, 1.5) .. controls (-0.6, 1.5) and (-1.5, 1.3) .. //to((0,1.5), out=180, in=90)
-                              (-1.5,0.7) -- cycle);
+                              (-1.5, 0.7) -- cycle);
 //DomeRoofTank.drawNodes();
 
 NodedPicture FloatingRoofTank; //checked
@@ -50,21 +52,18 @@ NodedPicture Drum;
 );*/
 //Drum.drawNodes();
 
-NodedPicture CentrifugalPump;
-
+NodedPicture CentrifugalPump; //checked
 CentrifugalPump.drawWithAddNodes(circ((0,0), 0.4));
 CentrifugalPump.drawWithAddNodes(circ((0,0), 0.05));
   //(0,0) circle (0.4) circle (0.05);
 CentrifugalPump.drawWithAddNodes(
 		rpp(230.19, 0.4) --
 		rpp(230.19, 0.377) --
-		rlp(1,0) //-- rpp(129.81, 0.377)
+		rlp(1,0) -- rpp(129.81, 0.377)
 );
-CentrifugalPump.drawWithAddNodes(circle((0,0), 0.377));
-
 //CentrifugalPump.drawNodes();
 
-NodedPicture HeatExchanger;
+NodedPicture HeatExchanger; //checked
 HeatExchanger.drawWithAddNodes(circ((0,0), 0.5));
 HeatExchanger.drawWithAddNodes((-0.5,0) --
 		(-0.25,0) --
@@ -74,7 +73,7 @@ HeatExchanger.drawWithAddNodes((-0.5,0) --
 );
 //HeatExchanger.drawNodes();
 
-NodedPicture BiPhaseHeatExchanger;
+NodedPicture BiPhaseHeatExchanger; //checked
 BiPhaseHeatExchanger.drawWithAddNodes(circ((0,0), 0.5));
 BiPhaseHeatExchanger.drawWithAddNodes(pol(30, 0.5) --
 		rlp(-0.6,0) --
@@ -83,7 +82,7 @@ BiPhaseHeatExchanger.drawWithAddNodes(pol(30, 0.5) --
 );
 //BiPhaseHeatExchanger.drawNodes();
 
-NodedPicture TubeShellHeatExchanger;
+NodedPicture TubeShellHeatExchanger; //checked
 TubeShellHeatExchanger.drawWithAddNodes((-1.0,-0.3) --
 		warc((0.7,-0.3), 270, 450, 0.3) --
 		(-1.0,0.3) -- cycle
@@ -97,7 +96,7 @@ TubeShellHeatExchanger.drawWithAddNodes((-0.6,-0.35) -- (-0.6,0.35));
 TubeShellHeatExchanger.drawWithAddNodes((0.6,-0.35) -- (0.6,0.35));
 //TubeShellHeatExchanger.drawNodes();
 
-NodedPicture Packing;
+NodedPicture Packing; //checked
 Packing.drawWithAddNodes(
 		(-0.8,-0.7) --
 		(0.8,0.7) --
@@ -106,7 +105,7 @@ Packing.drawWithAddNodes(
 );
 //Packing.drawNodes();
 
-NodedPicture Bubbler;
+NodedPicture Bubbler; //checked
 Bubbler.drawWithAddNodes((0,0) --
 			 t(1.4,0) -- rlp(0.1,0.1));
 Bubbler.drawWithAddNodes(t(0.2,0) -- rlp(-0.1,0.1));
@@ -118,7 +117,7 @@ Bubbler.drawWithAddNodes(t(1.0,0) -- rlp(0.1,0.1));
 Bubbler.drawWithAddNodes(t(1.4,0) -- rlp(-0.1,0.1));
 //Bubbler.drawNodes();
 
-NodedPicture Sprayer;
+NodedPicture Sprayer; //checked
 Sprayer.drawWithAddNodes((0,0) --
 			 t(1.4,0) -- rlp(0.1,-0.1));
 Sprayer.drawWithAddNodes(t(0.2,0) -- rlp(-0.1,-0.1));

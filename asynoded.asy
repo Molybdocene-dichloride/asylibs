@@ -13,11 +13,19 @@ coordsys R=currentcoordsys;
   //return (1,1);
 //}
 
+string string(point p) {
+  return "(" + string(p.x) + "," + string(p.y) + ")";
+}
+
 void print(string s) {
   write(s);
 }
 
 void print(real s) {
+  write(string(s));
+}
+
+void print(point s) {
   write(string(s));
 }
 
@@ -34,7 +42,7 @@ point t(real px, real py) {
 }
 
 point pol(real a, real r) {
-  currentpoint = R.polar(r, a);
+  currentpoint = R.polar(r, radians(a));
   return currentpoint;
 }
 
@@ -54,7 +62,7 @@ point rlp(real px, real py) {
 }
 
 point rpp(real a, real r) { //as PGF "++(:)"
-  currentpoint += R.polar(r, a);
+  currentpoint += R.polar(r, radians(a));
   return currentpoint;
 }
 
@@ -80,9 +88,24 @@ path rectr(point a, point b) {
   return rect(a, b);
 }
 
-path warc(point c, real s, real e, real r) {
-  currentpoint = c;
+struct ArcMode {
+  static int Start = 0;
+  static int Center = 1;
+}
+
+path warc(point a, real s, real e, real r, int md=ArcMode.Start) {
+  point c = (0, 0);
+  if(md == ArcMode.Start) {
+    c = (a.x - r * cos(radians(s)), a.y - r * sin(radians(s)));
+  } else {
+    c = a;
+  }
   return arc(c, r, s, e);
+}
+
+path warcr(point a, real s, real e, real r) {
+  currentpoint = a;
+  return warc(a, s, e, r);
 }
 
 struct NodedPicture {

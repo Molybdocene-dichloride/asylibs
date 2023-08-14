@@ -1,4 +1,6 @@
 //For package checking
 import asyplants;
 
-add(CentrifugalPump.parent.scale(20));
+add(BiPhaseHeatExchanger.parent.scale(10));
+
+add(ConeRoofTank.parent.scale(10), (10, 10));
