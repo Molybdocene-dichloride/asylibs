@@ -8,7 +8,7 @@ NodedPicture Tank;
 //Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)-- to((1,0.915) to out=90, in=90) (-1,0.915)--cycle)
 //Tank.drawNodes();
 
-NodedPicture ConeRoofTank; //checked?
+NodedPicture ConeRoofTank; //checked
 ConeRoofTank.drawWithAddNodes((-1.5, 1.1)--lowerpart--(1.5, 1.1)--(0, 1.5)--cycle);
 //ConeRoofTank.drawNodes();
 
