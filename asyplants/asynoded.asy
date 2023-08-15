@@ -13,6 +13,7 @@ coordsys R=currentcoordsys;
   //return (1,1);
 //}
 
+//print
 string string(point p) {
   return "(" + string(p.x) + "," + string(p.y) + ")";
 }
@@ -29,6 +30,7 @@ void print(point s) {
   write(string(s));
 }
 
+//draw
 void resetp() {
   currentpoint = (0, 0);
 }
@@ -106,6 +108,22 @@ path warc(point a, real s, real e, real r, int md=ArcMode.Start) {
 path warcr(point a, real s, real e, real r) {
   currentpoint = a;
   return warc(a, s, e, r);
+}
+
+triangle etrian(real x, real a=0, point pos=(0,0), int md=ArcMode.Start) {
+  //len of median \frac{\sqrt{3}x}{2}
+  real M = sqrt(3) * x / 2;
+  //len two parts of median (1:2)
+  real MCV = 2/3 * M;
+  //Vertices
+  point MCVA = pos + (MCV * cos(radians(a + 210)), MCV * sin(radians(a + 210))); //if pos is center!
+
+  return triangleabc(x, x, x, a, MCVA);
+}
+
+triangle etrianr(real A, real a=0, point pos=(0,0)) {
+  currentpoint = pos;
+  return etrian(A, a, pos);
 }
 
 struct NodedPicture {

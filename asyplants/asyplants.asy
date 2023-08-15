@@ -1,11 +1,56 @@
 import geometry;
 import asynoded;
 
+//Parts
 path lowerpart = (-1.5, 0.62)--(-1.5, -1.5)--(0, -1.5)--(1.5, -1.5)--t(1.5, 0.62);
 
+NodedPicture Packing; //checked
+Packing.drawWithAddNodes(
+		(-0.8,-0.7) --
+		(0.8,0.7) --
+		(-0.8,0.7) --
+		(0.8,-0.7) -- cycle
+);
+//Packing.drawNodes();
+
+NodedPicture Bubbler; //checked
+Bubbler.drawWithAddNodes((0,0) --
+			 t(1.4,0) -- rlp(0.1,0.1));
+Bubbler.drawWithAddNodes(t(0.2,0) -- rlp(-0.1,0.1));
+Bubbler.drawWithAddNodes(t(0.2,0) -- rlp(0.1,0.1));
+Bubbler.drawWithAddNodes(t(0.6,0) -- rlp(-0.1,0.1));
+Bubbler.drawWithAddNodes(t(0.6,0) -- rlp(0.1,0.1));
+Bubbler.drawWithAddNodes(t(1.0,0) -- rlp(-0.1,0.1));
+Bubbler.drawWithAddNodes(t(1.0,0) -- rlp(0.1,0.1));
+Bubbler.drawWithAddNodes(t(1.4,0) -- rlp(-0.1,0.1));
+//Bubbler.drawNodes();
+
+NodedPicture Sprayer; //checked
+Sprayer.drawWithAddNodes((0,0) --
+			 t(1.4,0) -- rlp(0.1,-0.1));
+Sprayer.drawWithAddNodes(t(0.2,0) -- rlp(-0.1,-0.1));
+Sprayer.drawWithAddNodes(t(0.2,0) -- rlp(0.1,-0.1));
+Sprayer.drawWithAddNodes(t(0.6,0) -- rlp(-0.1,-0.1));
+Sprayer.drawWithAddNodes(t(0.6,0) -- rlp(0.1,-0.1));
+Sprayer.drawWithAddNodes(t(1.0,0) -- rlp(-0.1,-0.1));
+Sprayer.drawWithAddNodes(t(1.0,0) -- rlp(0.1,-0.1));
+Sprayer.drawWithAddNodes(t(1.4,0) -- rlp(-0.1,-0.1));
+//Sprayer.drawNodes();
+
+triangle valvetriangle = etrian(0.2, 90);
+NodedPicture Valve;
+draw((0, 0));
+Valve.drawWithAddNodes(valvetriangle);
+Valve.drawWithAddNodes(shift((0.2, 0))*rotate(180)*valvetriangle, green);
+
+
 //Tanks
-NodedPicture Tank;
-//Tank.drawWithAddNodes((-1,-0.915) to [out=270, in=270] (1,-0.915)-- to((1,0.915) to out=90, in=90) (-1,0.915)--cycle)
+NodedPicture Tank; //checked
+Tank.drawWithAddNodes((-1, -0.915) .. controls (-1, -1.215) and (-0.30, -1.325) .. // to [out=270, in=270]
+  (0, -1.325) .. controls (0.30, -1.325) and (1, -1.215) .. 
+  (1, -0.915) -- (1, 0.915) .. controls (1, 1.215) and (0.30, 1.325) .. //to((1, 0.915), out=90, in=90)
+  (0, 1.325) .. controls (-0.30, 1.325) and (-1, 1.215) .. (-1, 0.915) -- cycle
+);
 //Tank.drawNodes();
 
 NodedPicture ConeRoofTank; //checked
@@ -44,12 +89,13 @@ Silos.drawWithAddNodes((0.7,-0.8) -- (0.7,-2));
 Silos.drawWithAddNodes((0.6,-2) -- (0.8,-2));
 //Silos.drawNodes();
 
-NodedPicture Drum;
-/*Drum.drawWithAddNodes((0.324,-0.3) to [out=0, in=0]
-		(0.324,0.3) --
-		to((-0.324,0.3), out=180, in=180)
-		(-0.324,-0.3) -- cycle
-);*/
+NodedPicture Drum; //checked
+Drum.drawWithAddNodes((0.324,-0.3) .. controls (0.384, -0.3) and (0.484, -0.15) .. 
+		(0.484, 0) .. controls (0.484, 0.15) and (0.384, 0.3) .. //(0.324,-0.3) to [out=0, in=0]
+		(0.324,0.3) -- (-0.324,0.3) .. controls (-0.384, 0.3) and (-0.484, 0.15) .. 
+		(-0.484, 0) .. controls (-0.484, -0.15) and (-0.384, -0.3) .. //to((-0.324,0.3), out=180, in=180)
+                (-0.324,-0.3) -- cycle
+);
 //Drum.drawNodes();
 
 NodedPicture CentrifugalPump; //checked
@@ -95,36 +141,3 @@ TubeShellHeatExchanger.drawWithAddNodes((-1.0,0.35) -- (-1.0,0.3));
 TubeShellHeatExchanger.drawWithAddNodes((-0.6,-0.35) -- (-0.6,0.35));
 TubeShellHeatExchanger.drawWithAddNodes((0.6,-0.35) -- (0.6,0.35));
 //TubeShellHeatExchanger.drawNodes();
-
-NodedPicture Packing; //checked
-Packing.drawWithAddNodes(
-		(-0.8,-0.7) --
-		(0.8,0.7) --
-		(-0.8,0.7) --
-		(0.8,-0.7) -- cycle
-);
-//Packing.drawNodes();
-
-NodedPicture Bubbler; //checked
-Bubbler.drawWithAddNodes((0,0) --
-			 t(1.4,0) -- rlp(0.1,0.1));
-Bubbler.drawWithAddNodes(t(0.2,0) -- rlp(-0.1,0.1));
-Bubbler.drawWithAddNodes(t(0.2,0) -- rlp(0.1,0.1));
-Bubbler.drawWithAddNodes(t(0.6,0) -- rlp(-0.1,0.1));
-Bubbler.drawWithAddNodes(t(0.6,0) -- rlp(0.1,0.1));
-Bubbler.drawWithAddNodes(t(1.0,0) -- rlp(-0.1,0.1));
-Bubbler.drawWithAddNodes(t(1.0,0) -- rlp(0.1,0.1));
-Bubbler.drawWithAddNodes(t(1.4,0) -- rlp(-0.1,0.1));
-//Bubbler.drawNodes();
-
-NodedPicture Sprayer; //checked
-Sprayer.drawWithAddNodes((0,0) --
-			 t(1.4,0) -- rlp(0.1,-0.1));
-Sprayer.drawWithAddNodes(t(0.2,0) -- rlp(-0.1,-0.1));
-Sprayer.drawWithAddNodes(t(0.2,0) -- rlp(0.1,-0.1));
-Sprayer.drawWithAddNodes(t(0.6,0) -- rlp(-0.1,-0.1));
-Sprayer.drawWithAddNodes(t(0.6,0) -- rlp(0.1,-0.1));
-Sprayer.drawWithAddNodes(t(1.0,0) -- rlp(-0.1,-0.1));
-Sprayer.drawWithAddNodes(t(1.0,0) -- rlp(0.1,-0.1));
-Sprayer.drawWithAddNodes(t(1.4,0) -- rlp(-0.1,-0.1));
-//Sprayer.drawNodes();
