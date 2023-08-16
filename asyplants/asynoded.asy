@@ -18,6 +18,9 @@ string string(point p) {
   return "(" + string(p.x) + "," + string(p.y) + ")";
 }
 
+void println(string s) {
+  write(s+"\n");
+}
 void print(string s) {
   write(s);
 }
@@ -43,11 +46,6 @@ point t(real px, real py) {
   return t((px, py));
 }
 
-point pol(real a, real r) {
-  currentpoint = R.polar(r, radians(a));
-  return currentpoint;
-}
-
 point rl(point p) { //as PGF "+(,)"
   return currentpoint + p;
 }
@@ -61,6 +59,19 @@ point rlp(point p) { //as PGF "++(,)"
 }
 point rlp(real px, real py) {
   return rlp((px, py));
+}
+
+//polars
+point pol(real a, real r) { //as PGF "(:)"
+  currentpoint = R.polar(r, radians(a));
+  return currentpoint;
+}
+point p(real a, real r) { //as PGF "(:)"
+  return pol(a, r);
+}
+
+point rp(real a, real r) { //as PGF "+(:)"
+  return currentpoint + R.polar(r, radians(a));
 }
 
 point rpp(real a, real r) { //as PGF "++(:)"
@@ -95,6 +106,11 @@ struct ArcMode {
   static int Center = 1;
 }
 
+struct SizeMode {
+  static int Side = 0;
+  static int Med = 1;
+}
+
 path warc(point a, real s, real e, real r, int md=ArcMode.Start) {
   point c = (0, 0);
   if(md == ArcMode.Start) {
@@ -110,15 +126,25 @@ path warcr(point a, real s, real e, real r) {
   return warc(a, s, e, r);
 }
 
-triangle etrian(real x, real a=0, point pos=(0,0), int md=ArcMode.Start) {
-  //len of median \frac{\sqrt{3}x}{2}
-  real M = sqrt(3) * x / 2;
+triangle etrian(real x, real a=0, point pos=(0,0), int md=ArcMode.Center, int sd=SizeMode.Med) { //equilateral, regular
+  real M = 0;
+  real xx = 0;
+  if(sd == SizeMode.Side) {
+    //len of median \frac{\sqrt{3}x}{2}
+    M = sqrt(3) * x / 2;
+    xx = x;
+  } else {
+    println("sss");
+    M = x;
+    xx = 2 * M / sqrt(3);
+    print(xx);
+  }
   //len two parts of median (1:2)
   real MCV = 2/3 * M;
   //Vertices
   point MCVA = pos + (MCV * cos(radians(a + 210)), MCV * sin(radians(a + 210))); //if pos is center!
 
-  return triangleabc(x, x, x, a, MCVA);
+  return triangleabc(xx, xx, xx, a, MCVA);
 }
 
 triangle etrianr(real A, real a=0, point pos=(0,0)) {
@@ -157,6 +183,10 @@ struct NodedPicture {
             }
 	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
 	    resetp();
+       }
+       void drawPic(NodedPicture pic, bool addNd=true) {
+            add(parent, pic.parent);
+            resetp();
        }
 }
 

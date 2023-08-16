@@ -1,6 +1,8 @@
 //For package checking
 import asyplants;
 
-add(Valve.parent.scale(100));
+add(HighPressureRotaryFeeder.parent.scale(100));
 
-//add(Valve.parent.scale(100), (100));
+add(RotaryFeeder.parent.scale(100), (100));
+
+//add(FourWayValve.parent.scale(100), (100, 100));

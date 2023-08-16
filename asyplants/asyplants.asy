@@ -37,11 +37,38 @@ Sprayer.drawWithAddNodes(t(1.0,0) -- rlp(0.1,-0.1));
 Sprayer.drawWithAddNodes(t(1.4,0) -- rlp(-0.1,-0.1));
 //Sprayer.drawNodes();
 
-triangle valvetriangle = etrian(0.2, 90);
-NodedPicture Valve;
-draw((0, 0));
+//Utility
+triangle valvetriangle = etrian(0.2, 270);
+NodedPicture Valve; //checked
 Valve.drawWithAddNodes(valvetriangle);
-Valve.drawWithAddNodes(shift((0.2, 0))*rotate(180)*valvetriangle, green);
+Valve.drawWithAddNodes(shift((valvetriangle.C.x + 0.2 * 2/3, 0))*rotate(180)*valvetriangle);
+
+NodedPicture ThreeWayValve; //checked
+ThreeWayValve.drawPic(Valve);
+ThreeWayValve.drawWithAddNodes(shift((valvetriangle.C.x, 0.2 * 2/3))*rotate(270)*valvetriangle);
+
+NodedPicture FourWayValve; //checked
+FourWayValve.drawPic(Valve);
+FourWayValve.drawWithAddNodes(shift((valvetriangle.C.x, 0.2 * 2/3))*rotate(270)*valvetriangle);
+FourWayValve.drawWithAddNodes(shift((valvetriangle.C.x, -0.2 * 2/3))*rotate(90)*valvetriangle);
+
+//RotaryFeeder
+NodedPicture RotaryFeeder;
+RotaryFeeder.drawWithAddNodes(circ((0, 0), 0.2));
+RotaryFeeder.drawWithAddNodes(
+		p(230.19, 0.2) --
+		rlp(0, -0.1) --
+		rlp(0.1, 0) -- p(270 + 39.81, 0.2)
+);
+
+//HighPressureRotaryFeeder
+NodedPicture HighPressureRotaryFeeder;
+HighPressureRotaryFeeder.drawWithAddNodes(circ((0, 0), 0.2));
+HighPressureRotaryFeeder.drawWithAddNodes(
+		p(230.19, 0.2) --
+		rlp(0, -0.1) --
+		rlp(0.1, 0) -- p(270 + 39.81, 0.2)
+);
 
 
 //Tanks
@@ -141,3 +168,17 @@ TubeShellHeatExchanger.drawWithAddNodes((-1.0,0.35) -- (-1.0,0.3));
 TubeShellHeatExchanger.drawWithAddNodes((-0.6,-0.35) -- (-0.6,0.35));
 TubeShellHeatExchanger.drawWithAddNodes((0.6,-0.35) -- (0.6,0.35));
 //TubeShellHeatExchanger.drawNodes();
+
+//Rotary filter
+
+//Press filter
+
+//Cyclone
+
+//Table
+
+//Digester
+
+//Heater
+
+//Bleached
