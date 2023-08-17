@@ -53,23 +53,67 @@ FourWayValve.drawWithAddNodes(shift((valvetriangle.C.x, 0.2 * 2/3))*rotate(270)*
 FourWayValve.drawWithAddNodes(shift((valvetriangle.C.x, -0.2 * 2/3))*rotate(90)*valvetriangle);
 
 //RotaryFeeder
-NodedPicture RotaryFeeder;
-RotaryFeeder.drawWithAddNodes(circ((0, 0), 0.2));
+NodedPicture RotaryFeeder; //checked?
+RotaryFeeder.drawWithAddNodes(circ((0, 0), 0.1));
 RotaryFeeder.drawWithAddNodes(
-		p(230.19, 0.2) --
-		rlp(0, -0.1) --
-		rlp(0.1, 0) -- p(270 + 39.81, 0.2)
+		p(270 - 39.81, 0.1) --
+		rlp(0, -0.05) --
+		rlp(0.128, 0) -- p(270 + 39.81, 0.1)
+);
+RotaryFeeder.drawWithAddNodes(
+		p(90 + 39.81, 0.1) --
+		rlp(0, 0.05) --
+		rlp(0.128, 0) -- p(90 - 39.81, 0.1)
 );
 
 //HighPressureRotaryFeeder
-NodedPicture HighPressureRotaryFeeder;
-HighPressureRotaryFeeder.drawWithAddNodes(circ((0, 0), 0.2));
+NodedPicture HighPressureRotaryFeeder; //checked?
+HighPressureRotaryFeeder.drawWithAddNodes(circ((0, 0), 0.1));
 HighPressureRotaryFeeder.drawWithAddNodes(
-		p(230.19, 0.2) --
-		rlp(0, -0.1) --
-		rlp(0.1, 0) -- p(270 + 39.81, 0.2)
+		p(270 - 39.81, 0.1) --
+		rlp(0.025, -0.08) --
+		rlp(0.128-0.05, 0) -- p(270 + 39.81, 0.1)
+);
+HighPressureRotaryFeeder.drawWithAddNodes(
+		p(90 + 39.81, 0.1) --
+		rlp(0.025, 0.08) --
+		rlp(0.128-0.05, 0) -- p(90 - 39.81, 0.1)
+);
+HighPressureRotaryFeeder.drawWithAddNodes(
+		p(180 - 39.81, 0.1) --
+		rlp(-0.08, -0.025) --
+		rlp(0, -0.128+0.05) -- p(180 + 39.81, 0.1)
+);
+HighPressureRotaryFeeder.drawWithAddNodes(
+		p(0 - 39.81, 0.1) --
+		rlp(0.08, 0.025) --
+		rlp(0, 0.128-0.05) -- p(0 + 39.81, 0.1)
 );
 
+//HighPressureRotaryFeeder
+NodedPicture HighPressureRotaryFeederA; //checked?
+HighPressureRotaryFeederA.drawWithAddNodes(circ((0, 0), 0.1));
+HighPressureRotaryFeederA.drawWithAddNodes(rect(/*(0, 0),*/ (-0.14, -0.1), (0.14, 0.1)));
+HighPressureRotaryFeederA.drawWithAddNodes(
+                pl((0, -0.024), 270 - 39.81, 0.1) --
+		rlp(0.025, -0.08) --
+		rlp(0.128-0.05, 0) -- pl((0, -0.024), 270 + 39.81, 0.1)
+);
+HighPressureRotaryFeederA.drawWithAddNodes(
+		pl((0, 0.024), 90 + 39.81, 0.1) --
+		rlp(0.025, 0.08) --
+		rlp(0.128-0.05, 0) -- pl((0, 0.024), 90 - 39.81, 0.1)
+);
+HighPressureRotaryFeederA.drawWithAddNodes(
+                pl((-0.064, 0), 180 - 39.81, 0.1) --
+		rlp(-0.08, -0.025) --
+		rlp(0, -0.128+0.05) -- pl((-0.064, 0), 180 + 39.81, 0.1)
+);
+HighPressureRotaryFeederA.drawWithAddNodes(
+                pl((0.064, 0), 0 - 39.81, 0.1) --
+		rlp(0.08, 0.025) --
+		rlp(0, 0.128-0.05) -- pl((0.064, 0), 0 + 39.81, 0.1)
+);
 
 //Tanks
 NodedPicture Tank; //checked
@@ -79,6 +123,15 @@ Tank.drawWithAddNodes((-1, -0.915) .. controls (-1, -1.215) and (-0.30, -1.325) 
   (0, 1.325) .. controls (-0.30, 1.325) and (-1, 1.215) .. (-1, 0.915) -- cycle
 );
 //Tank.drawNodes();
+
+NodedPicture BlowTank; //
+BlowTank.drawWithAddNodes(rect((-0.378, -1.4), (0.378, -1.3)));
+BlowTank.drawWithAddNodes(rect((-0.378, 1.25), (0.378, 1.15)));
+
+BlowTank.drawWithAddNodes(rect((-0.567, -1), (0.567, 1)));
+
+BlowTank.drawWithAddNodes((-0.567, 1) -- (-0.378, 1.15) -- (0.378, 1.15) -- (0.567, 1));
+BlowTank.drawWithAddNodes((-0.567, -1) -- (-0.378, -1.3) -- (0.378, -1.3) -- (0.567, -1));
 
 NodedPicture ConeRoofTank; //checked
 ConeRoofTank.drawWithAddNodes((-1.5, 1.1)--lowerpart--(1.5, 1.1)--(0, 1.5)--cycle);
@@ -169,11 +222,57 @@ TubeShellHeatExchanger.drawWithAddNodes((-0.6,-0.35) -- (-0.6,0.35));
 TubeShellHeatExchanger.drawWithAddNodes((0.6,-0.35) -- (0.6,0.35));
 //TubeShellHeatExchanger.drawNodes();
 
+//Sort
+NodedPicture PressureSort;
+PressureSort.drawWithAddNodes(rect((-0.4, -0.6), (0.4, 0.6)));
+PressureSort.drawWithAddNodes(rect((-0.3, -0.7), (0.3, -0.6)));
+PressureSort.drawWithAddNodes(rect((-0.4, -0.8), (0.4, -0.7)));
+PressureSort.drawWithAddNodes(warc((0, 0.6 - 0.35 * sin(radians(30))), 30, 150, 0.35, ArcMode.Center));
+
+
+//filter
 //Rotary filter
+NodedPicture RotaryFilter; //checked
+RotaryFilter.drawWithAddNodes(circ((0,0), (0.5)));
+RotaryFilter.drawWithAddNodes(circ((0,0), (0.05)));
+RotaryFilter.drawWithAddNodes((-0.7,0) --
+                             warc((-0.6,0), 180, 360, 0.6) -- (0.5,0));
 
 //Press filter
+NodedPicture PressFilter; //checked
+PressFilter.drawWithAddNodes(rect((-0.9,-0.4), (0.9,0.4)));
+for(int i = 1; i <= 17;++i) {
+  PressFilter.drawWithAddNodes(t(-0.9 + 0.1*i,-0.4) -- rlp(0,0.8));
+}
+PressFilter.drawWithAddNodes((-1,-0.4) --
+		(-1,-0.5) --
+		(1,-0.5) --
+                             (1,-0.4));
+
+//Drum filter
+NodedPicture DrumFilter; //checked
+DrumFilter.drawWithAddNodes(rect((-0.9, -0.45), (0.9, 0.45)));
+DrumFilter.drawWithAddNodes(warc((0, 0.45 - 0.65 * sin(radians(30))), 30, 150, 0.65, ArcMode.Center));
+
+//Deck
+NodedPicture DeckScreen; //checked?
+DeckScreen.drawWithAddNodes((-1,0) --
+		(0,-1) --
+		(1,0) --
+		(1,0.5) --
+                (-1,0.5) -- cycle);
+DeckScreen.drawWithAddNodes((-1,0) -- (1,0));
+DeckScreen.drawWithAddNodes((-1,0.5) -- (1,0), denselydotted);
+
+//Diffuser
+
+//DD
 
 //Cyclone
+NodedPicture Cyclone;
+Cyclone.drawWithAddNodes(rect((-0.3,0.25), (0.3,0)));
+Cyclone.drawWithAddNodes((0.3,0) -- (0,-1.0) -- (-0.3,0));
+
 
 //Table
 

@@ -61,7 +61,7 @@ point rlp(real px, real py) {
   return rlp((px, py));
 }
 
-//polars
+//polar
 point pol(real a, real r) { //as PGF "(:)"
   currentpoint = R.polar(r, radians(a));
   return currentpoint;
@@ -69,20 +69,27 @@ point pol(real a, real r) { //as PGF "(:)"
 point p(real a, real r) { //as PGF "(:)"
   return pol(a, r);
 }
-
 point rp(real a, real r) { //as PGF "+(:)"
   return currentpoint + R.polar(r, radians(a));
 }
-
 point rpp(real a, real r) { //as PGF "++(:)"
   currentpoint += R.polar(r, radians(a));
   return currentpoint;
 }
 
+//normal+polar
+point pl(point p, real a, real r) { //as PGF "(,)+(:)"
+  currentpoint = p + pol(a, r);
+  return currentpoint;
+}
+point pl(real px, real py, real a, real r) { //as PGF "(,)+(:)"
+  return pl((px, py), a, r);
+}
+
+//figures
 path circ(point c, real r) {
   return circle(c, r);
 }
-
 path circr(point c, real r) {
   currentpoint = c;
   return circ(c, r);
@@ -91,11 +98,9 @@ path circr(point c, real r) {
 path rectangle(point a, point b) {
   return a -- (a.x, b.y) -- b -- (b.x, a.y) -- cycle;
 }
-
 path rect(point a, point b) {
   return rectangle(a, b);
 }
-
 path rectr(point a, point b) {
   currentpoint = ((b.x - a.x) / 2 + a.x, (b.y - a.y) / 2 + a.y);
   return rect(a, b);
@@ -151,6 +156,11 @@ triangle etrianr(real A, real a=0, point pos=(0,0)) {
   currentpoint = pos;
   return etrian(A, a, pos);
 }
+
+//pens
+pen denselydotted = linetype(new real[]{linetype(dotted)[0], 8});
+pen tikzydotted = linetype(new real[]{linetype(dotted)[0], 16});
+pen looselydotted = linetype(new real[]{linetype(dotted)[0], 32});
 
 struct NodedPicture {
        picture parent;
