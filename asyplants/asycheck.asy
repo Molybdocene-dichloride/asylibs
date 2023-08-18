@@ -1,10 +1,10 @@
 //For package checking
 import asyplants;
 
-//add(Cyclone.parent.scale(100));
+add(Compressor.parent.scale(100));
 
-add(PressureSort.parent.scale(100), (200));
+add(MultiStageCompressor.parent.scale(100), (100, 0));
 
-add(BlowTank.parent.scale(100), (100, 100));
+add(Washer.parent.scale(100), (0, 200));
 
-add(DrumFilter.parent.scale(100), (0, 100));
+add(DPTank.parent.scale(100), (100, 200));

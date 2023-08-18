@@ -38,7 +38,7 @@ void resetp() {
   currentpoint = (0, 0);
 }
 
-point t(point p) {
+point t(point p) { //as PGF "(,)"
   currentpoint = p;
   return p;
 }
@@ -66,7 +66,7 @@ point pol(real a, real r) { //as PGF "(:)"
   currentpoint = R.polar(r, radians(a));
   return currentpoint;
 }
-point p(real a, real r) { //as PGF "(:)"
+point p(real a, real r) {
   return pol(a, r);
 }
 point rp(real a, real r) { //as PGF "+(:)"
@@ -87,7 +87,7 @@ point pl(real px, real py, real a, real r) { //as PGF "(,)+(:)"
 }
 
 //figures
-path circ(point c, real r) {
+path circ(point c, real r) { //() circ ()
   return circle(c, r);
 }
 path circr(point c, real r) {
@@ -95,7 +95,7 @@ path circr(point c, real r) {
   return circ(c, r);
 }
 
-path rectangle(point a, point b) {
+path rectangle(point a, point b) { //() rectangle ()
   return a -- (a.x, b.y) -- b -- (b.x, a.y) -- cycle;
 }
 path rect(point a, point b) {
@@ -116,7 +116,7 @@ struct SizeMode {
   static int Med = 1;
 }
 
-path warc(point a, real s, real e, real r, int md=ArcMode.Start) {
+path warc(point a, real s, real e, real r, int md=ArcMode.Start) { //() arc ()
   point c = (0, 0);
   if(md == ArcMode.Start) {
     c = (a.x - r * cos(radians(s)), a.y - r * sin(radians(s)));
@@ -131,7 +131,7 @@ path warcr(point a, real s, real e, real r) {
   return warc(a, s, e, r);
 }
 
-triangle etrian(real x, real a=0, point pos=(0,0), int md=ArcMode.Center, int sd=SizeMode.Med) { //equilateral, regular
+triangle etrian(real x, real a=0, point pos=(0,0), int md=ArcMode.Center, int sd=SizeMode.Med) { //equilateral, regular triangle
   real M = 0;
   real xx = 0;
   if(sd == SizeMode.Side) {
@@ -144,10 +144,18 @@ triangle etrian(real x, real a=0, point pos=(0,0), int md=ArcMode.Center, int sd
     xx = 2 * M / sqrt(3);
     print(xx);
   }
+  
+  pos c = (0, 0);
   //len two parts of median (1:2)
   real MCV = 2/3 * M;
-  //Vertices
-  point MCVA = pos + (MCV * cos(radians(a + 210)), MCV * sin(radians(a + 210))); //if pos is center!
+  point MCVA =  0;
+  if(md == ArcMode.Start) {
+    //c =
+    MCVA = pos;
+  } else {
+    c = pos;
+    MCVA = c + (MCV * cos(radians(a + 210)), MCV * sin(radians(a + 210))); //if pos is center!
+  }
 
   return triangleabc(xx, xx, xx, a, MCVA);
 }
@@ -162,36 +170,52 @@ pen denselydotted = linetype(new real[]{linetype(dotted)[0], 8});
 pen tikzydotted = linetype(new real[]{linetype(dotted)[0], 16});
 pen looselydotted = linetype(new real[]{linetype(dotted)[0], 32});
 
+//as PGF {start, ..., end}
+int[] numbs(int end, int start=0) {
+  int[] nm = {};
+  for(int i = start; i <= end; ++i) {
+    nm.push(i);
+  }
+  return nm;
+}
+
+//better than filldraw
+void fdraw(picture pic=currentpicture, Label L="", path pth, align align=NoAlign, pen p=currentpen, pen f=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+  draw(pic, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+  fill(pic, pth, p=f);
+}
+
 struct NodedPicture {
        picture parent;
        pair[] nodes;
-       void operator init() {
-
-       }
+       void operator init() {}
        void addNode(pair node) {
        	    this.nodes.push(node);
        }
        void addNodes(pair[] node) {
             this.nodes.append(node);
        }
-       void drawWithAddNode(path pth, int i, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+       void drawWithAddNode(path pth, int i, Label L="", align align=NoAlign, pen p=currentpen, pen f=p, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker, int isfill=0) {
        	    addNode(point(pth, i));
 	    
-	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+	    if(isfill == 0) draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+            if(isfill == 1) fdraw(pic=parent, L=L, pth, align=align, p=p, f=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
 	    resetp();
        }
-       void drawWithAddNodes(path pth, int[] ii, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+       void drawWithAddNodes(path pth, int[] ii, Label L="", align align=NoAlign, pen p=currentpen, pen f=p, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker, int isfill=0) {
             for(int i = 0; i < ii.length; ++i) {
 	    	    addNode(point(pth, ii[i]));
             }
-	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+            if(isfill == 0) draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+            if(isfill == 1) fdraw(pic=parent, L=L, pth, align=align, p=p, f=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
 	    resetp();
        }
-       void drawWithAddNodes(path pth, Label L="", align align=NoAlign, pen p=currentpen, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker) {
+       void drawWithAddNodes(path pth, Label L="", align align=NoAlign, pen p=currentpen, pen f=p, arrowbar arrow=None, arrowbar bar=None, margin margin=NoMargin, Label legend="", marker marker=nomarker, int isfill=0) {
             for(int i = 0; i < size(pth); ++i) {
 	    	    addNode(point(pth, i));
             }
-	    draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+	    if(isfill == 0) draw(pic=parent, L=L, pth, align=align, p=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
+            if(isfill == 1) fdraw(pic=parent, L=L, pth, align=align, p=p, f=p, arrow=arrow, bar=bar, margin=margin, legend=legend, marker=marker);
 	    resetp();
        }
        void drawPic(NodedPicture pic, bool addNd=true) {
